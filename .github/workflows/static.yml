@@ -3,7 +3,8 @@ name: Create 404 page, update base href, and deploy to GitHub Pages
 on:
   push:
     branches:
-      - gh_pages  # Replace with your branch name if different
+      - master
+      - gh_pages
 
 jobs:
   create-404-and-deploy:
@@ -35,7 +36,14 @@ jobs:
           touch .nojekyll
           echo ".nojekyll file created."
 
-      - name: Commit changes and deploy to GitHub Pages
+      - name: Commit changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add index.html 404.html .nojekyll
+          git commit -m "Update base href, create 404 page, add script section and .nojekyll file"
+      
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
