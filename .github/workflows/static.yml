@@ -22,7 +22,7 @@ jobs:
         uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
         with:
           html_path: 'index.html'
-          base_href: '/tabito.stage/'
+          base_href: '/tabito.stage'
 
       - name: Debug Output of Index.html Before Modifying
         run: cat index.html
