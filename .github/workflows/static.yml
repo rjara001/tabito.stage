@@ -43,6 +43,9 @@ jobs:
           touch .nojekyll
           echo ".nojekyll file created."
 
+      - name: Check Git Status Before Adding Files
+        run: git status
+
       - name: Add and Commit Changes
         run: |
           git add index.html 404.html .nojekyll
@@ -53,6 +56,12 @@ jobs:
       - name: Check Git Log After Commit
         run: git log --oneline -n 5
 
+      - name: Checkout gh-pages branch
+        run: |
+          git fetch origin
+          git checkout gh-pages
+          git merge master
+          
       - name: Push Changes to GitHub
         run: git push origin gh-pages
 
