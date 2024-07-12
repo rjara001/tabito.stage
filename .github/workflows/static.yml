@@ -35,6 +35,19 @@ jobs:
           touch .nojekyll
           echo ".nojekyll file created."
 
+      - name: Add and Commit Changes
+        run: |
+          git add index.html 404.html .nojekyll
+          git status  # Check if files are staged
+          git commit -m "Update base href, create 404 page, add script section and .nojekyll file"
+          git status  # Check status after commit
+
+      - name: Check Git Log After Commit
+        run: git log --oneline -n 5
+
+      - name: Push Changes to GitHub
+        run: git push origin gh-pages
+
       - name: Commit changes and deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
